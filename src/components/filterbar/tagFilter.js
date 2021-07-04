@@ -1,7 +1,7 @@
 import React from 'react'
 
 function TagFilter(props) {
-  const { value, types, setTypes } = props
+  const { value, types, updatedTag } = props
   return (
     <>
       <div className="checkbox">
@@ -11,15 +11,9 @@ function TagFilter(props) {
             className="icheck"
             value={value}
             onChange={() => {
-              let newTypes = [...types]
-              if (newTypes.includes(value)) {
-                newTypes.filter((value) => {
-                  return !value
-                })
-              } else {
-                newTypes = [value, ...newTypes]
-              }
+              updatedTag(value, types)
             }}
+            checked={types.includes(value)}
           />
           {value}
         </label>

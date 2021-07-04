@@ -13,7 +13,7 @@ function PriceFilter(props) {
               setPriceRange(value)
             }}
             checked={priceRange === value}
-          />{' '}
+          />
           {value}
         </label>
       </div>
