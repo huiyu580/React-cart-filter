@@ -1,5 +1,6 @@
 import React from 'react'
-function ProductItem() {
+function ProductItem(props) {
+  console.log(props)
   return (
     <tr>
       <td className="number text-center">1</td>

@@ -31,7 +31,6 @@ function App() {
   useEffect(() => {
     // 將抓到的data存入state
     setProducts(data)
-    console.log(data)
   }, [])
 
   function handlePriceRange(priceRange, products) {
@@ -85,7 +84,36 @@ function App() {
 
   function handleSort(sort, products) {
     let newProducts = [...products]
+    switch (sort) {
+      case 0:
+        newProducts.sort((a, b) => {
+          return a.id - b.id
+        })
+        break
+      case 1:
+        newProducts.sort((a, b) => {
+          return a.price - b.price
+        })
+        break
+      case 2:
+        newProducts.sort((a, b) => {
+          return b.price - a.price
+        })
+        break
+      default:
+        break
+    }
   }
+  // 每次資料有變動時
+  useEffect(() => {
+    let newProducts = []
+    handlePriceRange(priceRange, products)
+    handleTypeTags(types, newProducts)
+    handleSearchInput(searchInput, newProducts)
+    handleSort(sort, newProducts)
+    setFoundProducts(newProducts)
+  }, [priceRange, types, searchInput, sort, products])
+
   return (
     <>
       <div className="container">
@@ -115,7 +143,10 @@ function App() {
                     <div className="row">
                       <SortBar sort={sort} setSort={setSort} />
                     </div>
-                    <ProductList />
+                    <ProductList
+                      foundProducts={foundProducts}
+                      setFoundProducts={setFoundProducts}
+                    />
                   </div>
                 </div>
               </div>
