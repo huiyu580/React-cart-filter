@@ -31,6 +31,7 @@ function App() {
   useEffect(() => {
     // 將抓到的data存入state
     setProducts(data)
+    setPriceRange('所有')
   }, [])
 
   function handlePriceRange(priceRange, products) {
@@ -70,6 +71,7 @@ function App() {
         return isFound
       })
     }
+    return newProducts
   }
 
   function handleSearchInput(searchInput, products) {
@@ -80,6 +82,7 @@ function App() {
         return product.name.includes(searchInput)
       })
     }
+    return newProducts
   }
 
   function handleSort(sort, products) {
@@ -103,14 +106,16 @@ function App() {
       default:
         break
     }
+    return newProducts
   }
   // 每次資料有變動時
   useEffect(() => {
     let newProducts = []
-    handlePriceRange(priceRange, products)
-    handleTypeTags(types, newProducts)
-    handleSearchInput(searchInput, newProducts)
-    handleSort(sort, newProducts)
+    // 有回傳值就要用變數去接
+    newProducts = handlePriceRange(priceRange, products)
+    newProducts = handleTypeTags(types, newProducts)
+    newProducts = handleSearchInput(searchInput, newProducts)
+    newProducts = handleSort(sort, newProducts)
     setFoundProducts(newProducts)
   }, [priceRange, types, searchInput, sort, products])
 

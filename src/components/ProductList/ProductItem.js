@@ -1,16 +1,16 @@
 import React from 'react'
 function ProductItem(props) {
-  console.log(props)
+  const { id, picture, name, price, tag } = props
   return (
     <tr>
-      <td className="number text-center">1</td>
+      <td className="number text-center">{id}</td>
       <td className="image">
-        <img src="https://via.placeholder.com/400x300/FF8C00" alt="" />
+        <img src={picture} alt="" />
       </td>
       <td className="product">
-        <strong>Product 1</strong>
+        <strong>{name}</strong>
         <br />
-        This is the product description.
+        {tag}
       </td>
       <td className="rate text-right">
         <span>
@@ -21,7 +21,7 @@ function ProductItem(props) {
           <i className="fa fa-star-half-o"></i>
         </span>
       </td>
-      <td className="price text-right">$350</td>
+      <td className="price text-right">{price}</td>
     </tr>
   )
 }

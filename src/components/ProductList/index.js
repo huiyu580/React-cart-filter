@@ -10,11 +10,12 @@ function ProductList(props) {
           {foundProducts.map((value, i) => {
             return (
               <ProductItem
-                key={i}
+                key={value.id}
                 id={value.id}
                 picture={value.picture}
                 name={value.name}
                 price={value.price}
+                tag={value.tags}
               />
             )
           })}
